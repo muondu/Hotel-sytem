@@ -1,9 +1,15 @@
 import sqlite3
 from everything_db import *
-donn = sqlite3.connect('bill.db')
-d = donn.cursor()
-conn = sqlite3.connect('everything.db')
-c = conn.cursor()
+
+
+
+
+
+
+# donn = sqlite3.connect('bill.db')
+# d = donn.cursor()
+# conn = sqlite3.connect('everything.db')
+# c = conn.cursor()
 
 print("Hi. Welcome to Nero Nesh hotel")
 
@@ -70,13 +76,16 @@ elif activity == "b":
     global hotel_bill
     hotel_bill = 0
     print("You gan go to your hotel room")
+
     c.execute('SELECT * FROM hotel_rooms')
     print(c.fetchall())
+
+
     print("These are all the rooms available")
     which_room = input("Which room do you want:  ")
     print("The hotel rooms are 1000")
     hotel_bill += 1000
-    c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',(which_room))
+    c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',which_room)
     d.execute('INSERT INTO hotel_rooms VALUES(?)',hotel_bill)
 
     conn.commit()
