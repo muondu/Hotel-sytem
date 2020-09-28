@@ -29,7 +29,7 @@ def activities():
     ''')
 activities()
 
-if activity == "a":
+if activity == "a" or activity == "Eat food" or activity == "eat food" or activity == "Eat Food" or activity == "eat food" or activity == "A":
     print("The resturant is at the ground floor")
     what_meal = input("Do you want Breakfast, Lunch, Dinner or Disert:  ")
     if what_meal == "Breakfast":
@@ -69,7 +69,7 @@ if activity == "a":
         print("Desert is free")
         activities()
 
-elif activity == "c":
+elif activity == "c" or activity == "swimming pool":
     print("The swimming pool is at the top floor")
     activities()
 
@@ -79,7 +79,7 @@ elif activity == "c":
 
 
 
-elif activity == "b":
+elif activity == "b" or activity == "hotel room":
     global hotel_bill
     hotel_bill = 0
     print("You gan go to your hotel room")
