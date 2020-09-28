@@ -32,7 +32,7 @@ activities()
 if activity == "a" or activity == "Eat food" or activity == "eat food" or activity == "Eat Food" or activity == "eat food" or activity == "A":
     print("The resturant is at the ground floor")
     what_meal = input("Do you want Breakfast, Lunch, Dinner or Disert:  ")
-    if what_meal == "Breakfast":
+    if what_meal == "Breakfast" or what_meal == "breakfast":
         global breakfast_meal
         breakfast_meal = 0
         c.execute('SELECT * FROM breakfast')
@@ -42,7 +42,7 @@ if activity == "a" or activity == "Eat food" or activity == "eat food" or activi
         d.execute('INSERT INTO breakfast_bill VALUES(?)',(breakfast_meal,))
         donn.commit()
         activities()
-    elif what_meal == "Lunch":
+    elif what_meal == "Lunch" or what_meal == "luch":
         global lunch_meal
         lunch_meal = 0
         donn.commit()
@@ -53,7 +53,7 @@ if activity == "a" or activity == "Eat food" or activity == "eat food" or activi
         d.execute('INSERT INTO lunch_bill VALUES(?)',(lunch_meal,))
         donn.commit()
         activities()
-    elif what_meal == "Dinner":
+    elif what_meal == "Dinner" or what_meal == "dinner":
         global diner_meal
         diner_meal = 0
         c.execute('SELECT * FROM dinner')
@@ -63,7 +63,7 @@ if activity == "a" or activity == "Eat food" or activity == "eat food" or activi
         d.execute('INSERT INTO supper_bill VALUES(?)',(diner_meal,))
         donn.commit()
         activities()
-    elif what_meal == "Desert":
+    elif what_meal == "Desert" or what_meal == "desert":
         c.execute('SELECT * FROM desert')
         print(c.fetchall())
         print("Desert is free")
@@ -79,7 +79,7 @@ elif activity == "c" or activity == "swimming pool":
 
 
 
-elif activity == "b" or activity == "hotel room":
+elif activity == "b" or activity == "hotel room" or activity == "Hotel room":
     global hotel_bill
     hotel_bill = 0
     print("You gan go to your hotel room")
@@ -115,25 +115,25 @@ elif activity == "b" or activity == "hotel room":
 
 
     
-elif activity == "d":
+elif activity == "d" or activity == "cinema" or activity == "Cinema":
     print("These are the movies available ")
     c.execute('SELECT * FROM movie')
     print(c.fetchall())
     activities()
-elif activity == "e":
+elif activity == "e" or activity == "confrence" or activity == "Confrence":
     print("You can do confrences in the third floor")
     activities()
-elif activity == "f":
+elif activity == "f" or activity == "Sports" or activity == "sport":
     c.execute('SELECT * FROM sports')
     print(c.fetchall())
     activities()
-elif activity == "g":
+elif activity == "g" or activity == "spa" or activity == "Spa":
     print("The spa is on the 4 floor ")
     activities()
-elif activity == "h":
+elif activity == "h" or activity == "Salon and Barber shop" or activity == "salon and barber shop" or activity == "Salon and barber shop":
     print("There are in the 3 floor")
     activities()
-elif activity == "i":
+elif activity == "i" or activity == "total bill":
     def total_amount():
         # d.execute('SELECT * FROM breakfast_bill')
         # dub1 = d.fetchall()

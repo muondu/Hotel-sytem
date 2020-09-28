@@ -14,3 +14,4 @@ list1 = [a for dub in c.execute('SELECT * FROM numbers') for a in dub]
 print(list1)
 cola = sum(list1)
 print(cola)
+ 
