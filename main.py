@@ -41,6 +41,7 @@ if activity == "a":
         breakfast_meal += 50
         d.execute('INSERT INTO breakfast_bill VALUES(?)',(breakfast_meal,))
         donn.commit()
+        activities()
     elif what_meal == "Lunch":
         global lunch_meal
         lunch_meal = 0
@@ -50,6 +51,8 @@ if activity == "a":
         lunch_meal += 50
         print(c.fetchall())
         d.execute('INSERT INTO lunch_bill VALUES(?)',(lunch_meal,))
+        donn.commit()
+        activities()
     elif what_meal == "Dinner":
         global diner_meal
         diner_meal = 0
@@ -58,14 +61,17 @@ if activity == "a":
         diner_meal += 50
         print("Dinner is 50")
         d.execute('INSERT INTO supper_bill VALUES(?)',(diner_meal,))
-
+        donn.commit()
+        activities()
     elif what_meal == "Desert":
         c.execute('SELECT * FROM desert')
         print(c.fetchall())
         print("Desert is free")
+        activities()
 
 elif activity == "c":
     print("The swimming pool is at the top floor")
+    activities()
 
 
 
@@ -86,11 +92,11 @@ elif activity == "b":
     which_room = input("Which room do you want:  ")
     print("The hotel rooms are 1000")
     hotel_bill += 1000
-    c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',which_room)
-    d.execute('INSERT INTO hotel_rooms VALUES(?)',(hotel_bill,))
+    c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',(which_room,))
+    d.execute('INSERT INTO hotel_rooms VALUES(?)',(hotel_bill))
 
     conn.commit()
-    
+    activities()    
 
 
 
@@ -113,42 +119,45 @@ elif activity == "d":
     print("These are the movies available ")
     c.execute('SELECT * FROM movie')
     print(c.fetchall())
+    activities()
 elif activity == "e":
     print("You can do confrences in the third floor")
+    activities()
 elif activity == "f":
     c.execute('SELECT * FROM sports')
     print(c.fetchall())
-    print("")
+    activities()
 elif activity == "g":
     print("The spa is on the 4 floor ")
+    activities()
 elif activity == "h":
     print("There are in the 3 floor")
+    activities()
 elif activity == "i":
     def total_amount():
-                    
+        # d.execute('SELECT * FROM breakfast_bill')
+        # dub1 = d.fetchall()
+        # print(dub1)
+
         print("Your total price is ")
         global bill_total
         bill_total = 0
 
-        for dub in d.execute('SELECT * FROM breakfast_bill'):
-            bill_total += dub[0]
-            print(bill_total)
-            break
-        for dub in d.execute('SELECT * FROM lunch_bill'):
-            bill_total += dub[0]
-            print(bill_total)
-
-            break
-        for dub in d.execute('SELECT * FROM supper_bill'):
-            bill_total += dub[0]
-            print(bill_total)
-
-            break
-        for dub in d.execute('SELECT * FROM room_bill'):
-            bill_total += dub[0]
-            print(bill_total)
-
-            break
+        list1 = [a for dub in d.execute('SELECT * FROM breakfast_bill') for a in dub]
+        list2 = [a for dub in d.execute('SELECT * FROM lunch_bill') for a in dub]
+        list3 = [a for dub in d.execute('SELECT * FROM supper_bill') for a in dub]
+        list4 = [a for dub in d.execute('SELECT * FROM room_bill') for a in dub]
+        comal = sum(list1)
+        comal2 = sum(list2)
+        comal3 = sum(list3)
+        comal4 = sum(list4)
+        bill_total += comal
+        bill_total += comal2
+        bill_total += comal3
+        bill_total += comal4
+        print(bill_total)
+        
+       
         
         amount_cash = int(input("Enter amount paying here:  "))
 
@@ -159,7 +168,7 @@ elif activity == "i":
             balance = amount_cash - bill_total
             print("Your change is " + str(balance))
             print("Good bye.:D")
-        elif amount_cash == dub:
+        elif amount_cash == bill_total:
             print("Thankyou. Good bye:)")
         else:
             print("I did not understand you.:/")
