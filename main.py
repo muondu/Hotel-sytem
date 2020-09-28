@@ -31,7 +31,7 @@ activities()
 
 if activity == "a" or activity == "Eat food" or activity == "eat food" or activity == "Eat Food" or activity == "eat food" or activity == "A":
     print("The resturant is at the ground floor")
-    what_meal = input("Do you want Breakfast, Lunch, Dinner or Disert:  ")
+    what_meal = input("Do you want Breakfast, Lunch, Dinner or Desert:  ")
     if what_meal == "Breakfast" or what_meal == "breakfast":
         global breakfast_meal
         breakfast_meal = 0
@@ -42,7 +42,7 @@ if activity == "a" or activity == "Eat food" or activity == "eat food" or activi
         d.execute('INSERT INTO breakfast_bill VALUES(?)',(breakfast_meal,))
         donn.commit()
         activities()
-    elif what_meal == "Lunch" or what_meal == "luch":
+    elif what_meal == "Lunch" or what_meal == "lunch":
         global lunch_meal
         lunch_meal = 0
         donn.commit()
@@ -67,6 +67,9 @@ if activity == "a" or activity == "Eat food" or activity == "eat food" or activi
         c.execute('SELECT * FROM desert')
         print(c.fetchall())
         print("Desert is free")
+        activities()
+    else:
+        print("I did not understand you. Please try again.")
         activities()
 
 elif activity == "c" or activity == "swimming pool":
@@ -93,7 +96,7 @@ elif activity == "b" or activity == "hotel room" or activity == "Hotel room":
     print("The hotel rooms are 1000")
     hotel_bill += 1000
     c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',(which_room,))
-    d.execute('INSERT INTO hotel_rooms VALUES(?)',(hotel_bill))
+    d.execute('INSERT INTO room_bill VALUES(?)',(hotel_bill,))
 
     conn.commit()
     activities()    
@@ -117,7 +120,7 @@ elif activity == "b" or activity == "hotel room" or activity == "Hotel room":
     
 elif activity == "d" or activity == "cinema" or activity == "Cinema":
     print("These are the movies available ")
-    c.execute('SELECT * FROM movie')
+    c.execute('SELECT * FROM movies')
     print(c.fetchall())
     activities()
 elif activity == "e" or activity == "confrence" or activity == "Confrence":
@@ -170,8 +173,14 @@ elif activity == "i" or activity == "total bill":
             print("Good bye.:D")
         elif amount_cash == bill_total:
             print("Thankyou. Good bye:)")
+        elif amount_cash < 0:
+            print("You can not pay less than zero")
+            total_amount()
         else:
             print("I did not understand you.:/")
             total_amount()
             
     total_amount()
+else:
+    print("I did not understand you")
+    activities()
