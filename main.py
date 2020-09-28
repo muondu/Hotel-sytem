@@ -25,6 +25,7 @@ def activities():
     f Sports
     g Spa
     h Salon and Barber shop
+    i Find your total bill
     ''')
 activities()
 
@@ -38,7 +39,7 @@ if activity == "a":
         print(c.fetchall())
         print("The breakfast was 50")
         breakfast_meal += 50
-        d.execute('INSERT INTO breakfast_bill VALUES(?)',breakfast_meal)
+        d.execute('INSERT INTO breakfast_bill VALUES(?)',(breakfast_meal,))
         donn.commit()
     elif what_meal == "Lunch":
         global lunch_meal
@@ -48,15 +49,15 @@ if activity == "a":
         c.execute('SELECT * FROM lunch')
         lunch_meal += 50
         print(c.fetchall())
-        d.execute('INSERT INTO lunch_bill VALUES(?)',lunch_meal)
-    elif what_meal == "Diner":
+        d.execute('INSERT INTO lunch_bill VALUES(?)',(lunch_meal,))
+    elif what_meal == "Dinner":
         global diner_meal
         diner_meal = 0
         c.execute('SELECT * FROM dinner')
         print(c.fetchall())
         diner_meal += 50
         print("Dinner is 50")
-        d.execute('INSERT INTO supper_bill VALUES(?)',diner_meal)
+        d.execute('INSERT INTO supper_bill VALUES(?)',(diner_meal,))
 
     elif what_meal == "Desert":
         c.execute('SELECT * FROM desert')
@@ -86,7 +87,7 @@ elif activity == "b":
     print("The hotel rooms are 1000")
     hotel_bill += 1000
     c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',which_room)
-    d.execute('INSERT INTO hotel_rooms VALUES(?)',hotel_bill)
+    d.execute('INSERT INTO hotel_rooms VALUES(?)',(hotel_bill,))
 
     conn.commit()
     
@@ -122,3 +123,46 @@ elif activity == "g":
     print("The spa is on the 4 floor ")
 elif activity == "h":
     print("There are in the 3 floor")
+elif activity == "i":
+    def total_amount():
+                    
+        print("Your total price is ")
+        global bill_total
+        bill_total = 0
+
+        for dub in d.execute('SELECT * FROM breakfast_bill'):
+            bill_total += dub[0]
+            print(bill_total)
+            break
+        for dub in d.execute('SELECT * FROM lunch_bill'):
+            bill_total += dub[0]
+            print(bill_total)
+
+            break
+        for dub in d.execute('SELECT * FROM supper_bill'):
+            bill_total += dub[0]
+            print(bill_total)
+
+            break
+        for dub in d.execute('SELECT * FROM room_bill'):
+            bill_total += dub[0]
+            print(bill_total)
+
+            break
+        
+        amount_cash = int(input("Enter amount paying here:  "))
+
+        if amount_cash < bill_total:
+            print("Please pay more or the equal amount")
+            total_amount()
+        elif amount_cash > bill_total:
+            balance = amount_cash - bill_total
+            print("Your change is " + str(balance))
+            print("Good bye.:D")
+        elif amount_cash == dub:
+            print("Thankyou. Good bye:)")
+        else:
+            print("I did not understand you.:/")
+            total_amount()
+            
+    total_amount()
