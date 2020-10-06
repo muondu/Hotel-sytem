@@ -18,7 +18,7 @@ def activities():
     activity = input('''
     These are what you can do.
     a Eat food
-    b Go to your hotel room
+    b Find a rooom
     c Go to the swimming pool
     d Cinema
     e Confrence 
@@ -40,7 +40,7 @@ if activity == "a" or activity == "Eat food" or activity == "eat food" or activi
         print("The breakfast was 50")
         breakfast_meal += 50
         d.execute('INSERT INTO breakfast_bill VALUES(?)',(breakfast_meal,))
-        donn.commit()
+        donn.commit()   
         activities()
     elif what_meal == "Lunch" or what_meal == "lunch":
         global lunch_meal
@@ -96,9 +96,9 @@ elif activity == "b" or activity == "hotel room" or activity == "Hotel room":
     print("The hotel rooms are 1000")
     hotel_bill += 1000
     c.execute('DELETE FROM hotel_rooms WHERE hotelnumber = ?',(which_room,))
-    d.execute('INSERT INTO room_bill VALUES(?)',(hotel_bill,))
+    d.execute('INSERT INTO room_bill(price) VALUES(1000)')
 
-    conn.commit()
+    donn.commit()
     activities()    
 
 
@@ -120,7 +120,7 @@ elif activity == "b" or activity == "hotel room" or activity == "Hotel room":
     
 elif activity == "d" or activity == "cinema" or activity == "Cinema":
     print("These are the movies available ")
-    c.execute('SELECT * FROM movies')
+    c.execute('SELECT * FROM movilunch_billes')
     print(c.fetchall())
     activities()
 elif activity == "e" or activity == "confrence" or activity == "Confrence":
@@ -138,7 +138,7 @@ elif activity == "h" or activity == "Salon and Barber shop" or activity == "salo
     activities()
 elif activity == "i" or activity == "total bill":
     def total_amount():
-        # d.execute('SELECT * FROM breakfast_bill')
+        # d.execute('SELECT * FROM 0fast_bill')
         # dub1 = d.fetchall()
         # print(dub1)
 
@@ -150,14 +150,18 @@ elif activity == "i" or activity == "total bill":
         list2 = [a for dub in d.execute('SELECT * FROM lunch_bill') for a in dub]
         list3 = [a for dub in d.execute('SELECT * FROM supper_bill') for a in dub]
         list4 = [a for dub in d.execute('SELECT * FROM room_bill') for a in dub]
+        # c.execute('SELECT * FROM room_bill')
+        # print(c.fetchall())
         comal = sum(list1)
         comal2 = sum(list2)
         comal3 = sum(list3)
         comal4 = sum(list4)
+
         bill_total += comal
         bill_total += comal2
         bill_total += comal3
         bill_total += comal4
+        
         print(bill_total)
         
        

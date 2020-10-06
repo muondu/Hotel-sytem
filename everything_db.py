@@ -18,12 +18,22 @@ def rooms():
     # print(c.fetchall())
 rooms()
 
+
+
 def bill():
     d.execute('CREATE TABLE IF NOT EXISTS breakfast_bill(price INTEGER)')
     d.execute('CREATE TABLE IF NOT EXISTS lunch_bill(price INTEGER)')
     d.execute('CREATE TABLE IF NOT EXISTS supper_bill(price INTEGER)')
     d.execute('CREATE TABLE IF NOT EXISTS room_bill(price INTEGER)')
 bill()
+
+
+
+
+
+
+
+
 def breakfast():
     c.execute('CREATE TABLE IF NOT EXISTS breakfast(name TEXT)')
     c.execute('INSERT INTO breakfast VALUES("Eggs")')
