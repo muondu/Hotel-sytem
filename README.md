@@ -6,7 +6,7 @@
   <h3 align="center">Hotel System</h3>
 
   <p align="center">
-    This project is a Voting sytem <br>
+    This project is a Supermarket sytem <br>
    You can go to the  
     Swimming pool,
     Spa
